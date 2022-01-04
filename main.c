@@ -208,7 +208,7 @@ void	ft_list_sort(t_list *a, int n)
 				a = a->next;
 				ptr->next = ((void *)0);
 				ft_lstadd_front(&b, ptr);
-				write(1,"pa\n", 3);
+				write(1,"pb\n", 3);
 			}
 			else
 			{
@@ -226,9 +226,11 @@ void	ft_list_sort(t_list *a, int n)
 			b = b->next;
 			ptr->next = ((void *)0);
 			ft_lstadd_front(&a, ptr);
-			write(1,"pb\n", 3);
+			write(1,"pa\n", 3);
 		}
 		j++;
+		//ft_print_list(a);
+		//ft_print_list(b);
 	}
 }
 
