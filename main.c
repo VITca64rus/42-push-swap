@@ -154,11 +154,12 @@ void	ft_add_id_sort(t_list *list)
 		list = list->next;
 	}
 	ft_sort_array(&arr, size);
+	// printf("%d %d %d", list->p_num_sort, list->next->p_num_sort, list->next->next->p_num_sort);
 	list = p;
 	while (p)
 	{
 		i = 0;
-		while (arr[i] != p->num && arr[i])
+		while (arr[i] != p->num)
 			i++;
 		p->p_num_sort = i;
 		p = p->next;
@@ -229,8 +230,6 @@ void	ft_list_sort(t_list *a, int n)
 			write(1,"pa\n", 3);
 		}
 		j++;
-		//ft_print_list(a);
-		//ft_print_list(b);
 	}
 }
 
