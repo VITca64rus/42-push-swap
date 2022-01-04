@@ -192,6 +192,7 @@ int	ft_sorted(t_list *a)
 void	ft_list_sort(t_list *a, int n)
 {
 	t_list	*b;
+	t_list	*bptr;
 	t_list	*ptr;
 	int		i;
 	int		j;
@@ -219,6 +220,8 @@ void	ft_list_sort(t_list *a, int n)
 				ptr->next->next = ((void *)0);
 				write(1, "ra\n", 3);
 			}
+			free(ptr);
+			free(b);
 			i++;
 		}
 		while(b)
@@ -237,12 +240,13 @@ int	main(int argc, char **argv)
 {
 	int a;
 	t_list	*list;
+	t_list	*p;
 
-	if (argc == 1)
-		write(1, "No argumets", 12);
+	// if (argc == 1)
+	// 	write(1, "No argumets", 12);
 
-	else
-	{
+	//else
+	//{
 		list = ft_check_argv(argc, argv);
 		if (list != 0)
 		{
@@ -251,6 +255,12 @@ int	main(int argc, char **argv)
 		}
 		else
 			write(1, "Error", 6);
+	//}
+	while (list)
+	{
+		p = list->next;
+		free(list);
+		list = p;
 	}
 	return (0);
 }
