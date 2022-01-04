@@ -26,7 +26,7 @@ t_list	*ft_lstlast(t_list *lst)
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (lst)
+	if (*lst)
 		new->next = *lst;
 	else
 		new->next = ((void *)0);
@@ -166,6 +166,72 @@ void	ft_add_id_sort(t_list *list)
 	free(arr);
 }
 
+void ft_print_list(t_list *a)
+{
+	printf("\n");
+	while(a)
+	{
+		printf("%d ", a->num);
+		a = a->next;
+	}
+}
+
+int	ft_sorted(t_list *a)
+{
+	while (a->next)
+	{
+		if (a->next->p_num_sort == a->p_num_sort + 1)
+			a = a->next;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+void	ft_list_sort(t_list *a, int n)
+{
+	t_list	*b;
+	t_list	*ptr;
+	int		i;
+	int		j;
+
+	j = 0;
+	while (ft_sorted(a) != 1)
+	{
+		b = ((void *)0);
+		i = 0;
+		while (i < n)
+		{
+			if ((a->p_num_sort >> j & 1) == 0)
+			{
+				ptr = a;
+				a = a->next;
+				ptr->next = ((void *)0);
+				ft_lstadd_front(&b, ptr);
+				write(1,"pa\n", 3);
+			}
+			else
+			{
+				ptr = ft_lstlast(a);
+				ptr->next = a;
+				a = a->next;
+				ptr->next->next = ((void *)0);
+				write(1, "ra\n", 3);
+			}
+			i++;
+		}
+		while(b)
+		{
+			ptr = b;
+			b = b->next;
+			ptr->next = ((void *)0);
+			ft_lstadd_front(&a, ptr);
+			write(1,"pb\n", 3);
+		}
+		j++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int a;
@@ -180,6 +246,7 @@ int	main(int argc, char **argv)
 		if (list != 0)
 		{
 			ft_add_id_sort(list);
+			ft_list_sort(list, ft_lstsize(list));
 		}
 		else
 			write(1, "Error", 6);
