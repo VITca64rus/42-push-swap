@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/05 12:39:20 by sazelda           #+#    #+#             */
+/*   Updated: 2022/01/05 12:43:01 by sazelda          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_is_number(char *a)
@@ -32,13 +44,13 @@ int	ft_is_number(char *a)
 
 t_list	*ft_check_argv(int argc, char **argv)
 {
-	int	i;
-	int j;
+	int		i;
+	int		j;
 	t_list	*list_el;
 	t_list	*list;
 
 	list = ((void *)0);
-	i = argc - 1;;
+	i = argc - 1;
 	if (i == 0)
 		write(1, "No arguments\n", 13);
 	while (i > 1)
@@ -46,7 +58,8 @@ t_list	*ft_check_argv(int argc, char **argv)
 		j = i - 1;
 		while (j > 0)
 		{
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]) || ft_is_number(argv[i]) == 0)
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]) \
+				|| ft_is_number(argv[i]) == 0)
 			{
 				//CLEAR FIX_ME
 				return (0);
@@ -64,9 +77,9 @@ t_list	*ft_check_argv(int argc, char **argv)
 
 void	ft_sort_array(int **arr, int size)
 {
-	int i;
-	int j;
-	int buff;
+	int	i;
+	int	j;
+	int	buff;
 
 	i = 0;
 	while (i < size - 1)
@@ -88,9 +101,9 @@ void	ft_sort_array(int **arr, int size)
 
 void	ft_add_id_sort(t_list *list)
 {
-	int	*arr;
-	int	i;
-	int size;
+	int		*arr;
+	int		i;
+	int		size;
 	t_list	*p;
 
 	p = list;
@@ -135,8 +148,8 @@ void	ft_list_sort(t_list *a, int n)
 	t_list	*ptr;
 	int		i;
 	int		j;
-	ptr = 0;
 
+	ptr = 0;
 	j = 0;
 	while (ft_sorted(a) != 1)
 	{
@@ -150,7 +163,7 @@ void	ft_list_sort(t_list *a, int n)
 				a = a->next;
 				ptr->next = ((void *)0);
 				ft_lstadd_front(&b, ptr);
-				write(1,"pb\n", 3);
+				write(1, "pb\n", 3);
 			}
 			else
 			{
@@ -162,13 +175,13 @@ void	ft_list_sort(t_list *a, int n)
 			}
 			i++;
 		}
-		while(b)
+		while (b)
 		{
 			ptr = b;
 			b = b->next;
 			ptr->next = ((void *)0);
 			ft_lstadd_front(&a, ptr);
-			write(1,"pa\n", 3);
+			write(1, "pa\n", 3);
 		}
 		j++;
 	}
@@ -176,7 +189,7 @@ void	ft_list_sort(t_list *a, int n)
 
 int	main(int argc, char **argv)
 {
-	int a;
+	int		a;
 	t_list	*list;
 	t_list	*p;
 
@@ -184,9 +197,7 @@ int	main(int argc, char **argv)
 	if (list != 0)
 	{
 		if (ft_lstsize(list) == 3)
-		{
 			ft_sort_three(list);
-		}
 		else if (ft_lstsize(list) == 5)
 		{
 			ft_add_id_sort(list);

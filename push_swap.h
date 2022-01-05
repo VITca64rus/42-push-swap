@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/05 12:42:11 by sazelda           #+#    #+#             */
+/*   Updated: 2022/01/05 12:42:12 by sazelda          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -6,8 +18,8 @@
 
 typedef struct s_list
 {
-	int	num;
-	int	p_num_sort;
+	int				num;
+	int				p_num_sort;
 	struct s_list	*next;
 }	t_list;
 

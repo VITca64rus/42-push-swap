@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_simple.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/05 12:38:04 by sazelda           #+#    #+#             */
+/*   Updated: 2022/01/05 12:42:38 by sazelda          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_sort_three(t_list *a)
 {
-	int	buf;
-	t_list *start;
+	int		buf;
+	t_list	*start;
 
 	start = a;
 	buf = 0;
@@ -47,7 +59,7 @@ void	ft_sort_five(t_list *a)
 			a = a->next;
 			ptr->next = ((void *)0);
 			ft_lstadd_front(&b, ptr);
-			write(1,"pb\n", 3);
+			write(1, "pb\n", 3);
 		}
 		else
 		{
