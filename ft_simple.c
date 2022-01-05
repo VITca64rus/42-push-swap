@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:38:04 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 12:42:38 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 13:21:05 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ void	ft_sort_five(t_list *a)
 	if (b->p_num_sort < b->p_num_sort)
 		write(1, "sb\n", 3);
 	write(1, "pa\npa\n", 6);
+	ft_list_clear(b);
 }

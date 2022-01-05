@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:42:11 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 12:42:12 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 13:17:14 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_list	*ft_lstnew(int content);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
+void	ft_list_clear(t_list *list);
 int		ft_atoi(const char *str);
 
 #endif

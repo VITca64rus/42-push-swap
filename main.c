@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:39:20 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 12:43:01 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 13:22:59 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_list	*ft_check_argv(int argc, char **argv)
 			if (ft_atoi(argv[i]) == ft_atoi(argv[j]) \
 				|| ft_is_number(argv[i]) == 0)
 			{
-				//CLEAR FIX_ME
+				ft_list_clear(list);
 				return (0);
 			}
 			j--;
@@ -141,7 +141,7 @@ int	ft_sorted(t_list *a)
 	return (1);
 }
 
-void	ft_list_sort(t_list *a, int n)
+void	ft_list_sort(t_list **a, int n)
 {
 	t_list	*b;
 	t_list	*bptr;
@@ -151,36 +151,37 @@ void	ft_list_sort(t_list *a, int n)
 
 	ptr = 0;
 	j = 0;
-	while (ft_sorted(a) != 1)
+	while (ft_sorted(*a) != 1)
 	{
 		b = ((void *)0);
 		i = 0;
 		while (i < n)
 		{
-			if ((a->p_num_sort >> j & 1) == 0)
+			if (((*a)->p_num_sort >> j & 1) == 0)
 			{
-				ptr = a;
-				a = a->next;
+				ptr = *a;
+				*a = (*a)->next;
 				ptr->next = ((void *)0);
 				ft_lstadd_front(&b, ptr);
 				write(1, "pb\n", 3);
 			}
 			else
 			{
-				ptr = ft_lstlast(a);
-				ptr->next = a;
-				a = a->next;
+				ptr = ft_lstlast(*a);
+				ptr->next = *a;
+				*a = (*a)->next;
 				ptr->next->next = ((void *)0);
 				write(1, "ra\n", 3);
 			}
 			i++;
 		}
+		bptr = b;
 		while (b)
 		{
 			ptr = b;
 			b = b->next;
 			ptr->next = ((void *)0);
-			ft_lstadd_front(&a, ptr);
+			ft_lstadd_front(a, ptr);
 			write(1, "pa\n", 3);
 		}
 		j++;
@@ -206,16 +207,11 @@ int	main(int argc, char **argv)
 		else
 		{
 			ft_add_id_sort(list);
-			ft_list_sort(list, ft_lstsize(list));
+			ft_list_sort(&list, ft_lstsize(list));
 		}
 	}
 	else
 		write(1, "Error", 6);
-	while (list)
-	{
-		p = list->next;
-		free(list);
-		list = p;
-	}
+	ft_list_clear(list);
 	return (0);
 }

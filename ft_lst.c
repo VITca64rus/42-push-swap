@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:37:57 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 12:37:58 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 13:17:00 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,16 @@ int	ft_lstsize(t_list *lst)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_list_clear(t_list *list)
+{
+	t_list	*p;
+
+	while (list)
+	{
+		p = list->next;
+		free(list);
+		list = p;
+	}
 }
