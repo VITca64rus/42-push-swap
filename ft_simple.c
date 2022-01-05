@@ -6,11 +6,23 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:38:04 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 13:21:05 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 14:46:11 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	ft_sa(t_list **a)
+{
+	int	buf;
+
+	buf = 0;
+	write (1, "sa\n", 3);
+	buf = (*a)->num;
+	(*a)->num = (*a)->next->num;
+	(*a)->next->num = buf;
+	*a = (*a)->next;
+}
 
 void	ft_sort_three(t_list *a)
 {
@@ -23,11 +35,7 @@ void	ft_sort_three(t_list *a)
 		a = a->next;
 	else
 	{
-		write (1, "sa\n", 3);
-		buf = a->num;
-		a->num = a->next->num;
-		a->next->num = buf;
-		a = a->next;
+		ft_sa(&a);
 	}
 	if (a->num > a->next->num)
 	{
@@ -42,6 +50,29 @@ void	ft_sort_three(t_list *a)
 	}
 }
 
+static void	ft_pb_ra_s(t_list **a, t_list **b)
+{
+	t_list	*ptr;
+
+	ptr = 0;
+	if ((*a)->p_num_sort == 0 || (*a)->p_num_sort == 1)
+	{
+		ptr = *a;
+		*a = (*a)->next;
+		ptr->next = ((void *)0);
+		ft_lstadd_front(b, ptr);
+		write(1, "pb\n", 3);
+	}
+	else
+	{
+		ptr = ft_lstlast(*a);
+		ptr->next = *a;
+		*a = (*a)->next;
+		ptr->next->next = ((void *)0);
+		write(1, "ra\n", 3);
+	}
+}
+
 void	ft_sort_five(t_list *a)
 {
 	t_list	*p;
@@ -53,26 +84,11 @@ void	ft_sort_five(t_list *a)
 	i = 0;
 	while (i < 5)
 	{
-		if (a->p_num_sort == 0 || a->p_num_sort == 1)
-		{
-			ptr = a;
-			a = a->next;
-			ptr->next = ((void *)0);
-			ft_lstadd_front(&b, ptr);
-			write(1, "pb\n", 3);
-		}
-		else
-		{
-			ptr = ft_lstlast(a);
-			ptr->next = a;
-			a = a->next;
-			ptr->next->next = ((void *)0);
-			write(1, "ra\n", 3);
-		}
+		ft_pb_ra_s(&a, &b);
 		i++;
 	}
 	ft_sort_three(a);
-	if (b->p_num_sort < b->p_num_sort)
+	if (b->p_num_sort < b->next->p_num_sort)
 		write(1, "sb\n", 3);
 	write(1, "pa\npa\n", 6);
 	ft_list_clear(b);
