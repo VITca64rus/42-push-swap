@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:42:11 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 14:04:42 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 16:19:26 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "libft/libft.h"
 
 typedef struct s_list
 {

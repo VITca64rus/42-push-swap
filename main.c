@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:39:20 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 14:50:09 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 15:49:40 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,14 @@ static t_list	*ft_check_argv(int argc, char **argv)
 	int		j;
 	t_list	*list_el;
 	t_list	*list;
+	//char	**arg;
 
 	list = ((void *)0);
 	argc--;
+	if (argc == 1)
+		argv = ft_split(argv[1], ' ');
+
+	printf("%s %s %s", argv[0], argv[1], argv[2]);
 	while (argc > 1)
 	{
 		j = argc - 1;
