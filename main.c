@@ -1,72 +1,33 @@
-typedef struct s_list
+#include "push_swap.h"
+
+int	ft_is_number(char *a)
 {
-	int	num;
-	int	p_num_sort;
-	struct s_list	*next;
-}	t_list;
+	int	i;
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*res;
-
-	res = (t_list *)malloc(sizeof(t_list));
-	if (!res)
-		return ((void *)0);
-	res->num = (int)content;
-	res->next = ((void *)0);
-	return (res);
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-void	ft_lstadd_front(t_list **lst, t_list *new)
-{
-	if (*lst)
-		new->next = *lst;
-	else
-		new->next = ((void *)0);
-	*lst = new;
-}
-
-static void	go_to(const char *str, int *i, int *znak)
-{
-	while (str[*i] == ' ' || str[*i] == '\t' || str[*i] == '\n' \
-			|| str[*i] == '\v' || str[*i] == '\f' || str[*i] == '\r')
-		*i = *i + 1;
-	if (str[*i] == '-')
-	{
-		*znak = -1;
-		*i = *i + 1;
-	}
-	else if (str[*i] == '+')
-		*i = *i + 1;
-}
-
-int	ft_atoi(const char *str)
-{
-	long int	res;
-	int			i;
-	int			znak;
-
-	res = 0;
 	i = 0;
-	znak = 1;
-	go_to(str, &i, &znak);
-	while (str[i] >= '0' && str[i] <= '9')
-	{	
-		if (znak * res < -2147483648)
+	while (a[i] != '\0')
+	{
+		if ((a[i] < '0' || a[i] > '9') && (a[i] != '-' && i == 0))
 			return (0);
-		else if (res > 2147483647)
-			return (-1);
-		res = res * 10 + (str[i] - '0');
 		i++;
 	}
-	return ((int)res * znak);
+	if (i > 11)
+		return (0);
+	if (i == 10)
+	{
+		if (ft_atoi(a) >= 1000000000 && ft_atoi(a) <= 2147483647)
+			return (1);
+		else
+			return (0);
+	}
+	else if (i == 11)
+	{
+		if (ft_atoi(a) >= -2147483648 && ft_atoi(a) <= -1000000000)
+			return (1);
+		else
+			return (0);
+	}
+	return (1);
 }
 
 t_list	*ft_check_argv(int argc, char **argv)
@@ -78,12 +39,14 @@ t_list	*ft_check_argv(int argc, char **argv)
 
 	list = ((void *)0);
 	i = argc - 1;;
+	if (i == 0)
+		write(1, "No arguments\n", 13);
 	while (i > 1)
 	{
 		j = i - 1;
 		while (j > 0)
 		{
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]) || ft_is_number(argv[i]) == 0)
 			{
 				//CLEAR FIX_ME
 				return (0);
@@ -97,19 +60,6 @@ t_list	*ft_check_argv(int argc, char **argv)
 	list_el = ft_lstnew(ft_atoi(argv[i]));
 	ft_lstadd_front(&list, list_el);
 	return (list);
-}
-
-int	ft_lstsize(t_list *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
 }
 
 void	ft_sort_array(int **arr, int size)
@@ -154,7 +104,6 @@ void	ft_add_id_sort(t_list *list)
 		list = list->next;
 	}
 	ft_sort_array(&arr, size);
-	// printf("%d %d %d", list->p_num_sort, list->next->p_num_sort, list->next->next->p_num_sort);
 	list = p;
 	while (p)
 	{
@@ -165,16 +114,6 @@ void	ft_add_id_sort(t_list *list)
 		p = p->next;
 	}
 	free(arr);
-}
-
-void ft_print_list(t_list *a)
-{
-	printf("\n");
-	while(a)
-	{
-		printf("%d ", a->num);
-		a = a->next;
-	}
 }
 
 int	ft_sorted(t_list *a)
@@ -196,6 +135,7 @@ void	ft_list_sort(t_list *a, int n)
 	t_list	*ptr;
 	int		i;
 	int		j;
+	ptr = 0;
 
 	j = 0;
 	while (ft_sorted(a) != 1)
@@ -220,8 +160,6 @@ void	ft_list_sort(t_list *a, int n)
 				ptr->next->next = ((void *)0);
 				write(1, "ra\n", 3);
 			}
-			free(ptr);
-			free(b);
 			i++;
 		}
 		while(b)
@@ -242,20 +180,26 @@ int	main(int argc, char **argv)
 	t_list	*list;
 	t_list	*p;
 
-	// if (argc == 1)
-	// 	write(1, "No argumets", 12);
-
-	//else
-	//{
-		list = ft_check_argv(argc, argv);
-		if (list != 0)
+	list = ft_check_argv(argc, argv);
+	if (list != 0)
+	{
+		if (ft_lstsize(list) == 3)
+		{
+			ft_sort_three(list);
+		}
+		else if (ft_lstsize(list) == 5)
+		{
+			ft_add_id_sort(list);
+			ft_sort_five(list);
+		}
+		else
 		{
 			ft_add_id_sort(list);
 			ft_list_sort(list, ft_lstsize(list));
 		}
-		else
-			write(1, "Error", 6);
-	//}
+	}
+	else
+		write(1, "Error", 6);
 	while (list)
 	{
 		p = list->next;
