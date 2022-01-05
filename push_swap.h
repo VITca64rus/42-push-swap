@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:42:11 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 16:19:26 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 20:09:15 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-void	ft_sort_three(t_list *a);
-void	ft_sort_five(t_list *a);
+void	ft_sort_three(t_list **a);
+void	ft_sort_five(t_list **a);
 t_list	*ft_lstnew(int content);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);

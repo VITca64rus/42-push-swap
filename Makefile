@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
 SRC  =  	main.c 		ft_simple.c 	ft_radix.c\
 			ft_lst.c 	ft_help.c
 

@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:39:20 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 15:49:40 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 20:10:26 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,20 @@ static t_list	*ft_check_argv(int argc, char **argv)
 	int		j;
 	t_list	*list_el;
 	t_list	*list;
-	//char	**arg;
+	int		flag;
 
 	list = ((void *)0);
 	argc--;
+	flag = argc;
 	if (argc == 1)
+	{
 		argv = ft_split(argv[1], ' ');
-
-	printf("%s %s %s", argv[0], argv[1], argv[2]);
-	while (argc > 1)
+		argc = 0;
+		while (argv[argc])
+			argc++;
+		argc--;
+	}
+	while ((argc > 1 && flag > 1) || (argc >= 1 && flag == 1))
 	{
 		j = argc - 1;
 		while (j > 0)
@@ -75,19 +80,19 @@ static t_list	*ft_check_argv(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	int		a;
 	t_list	*list;
-	t_list	*p;
 
 	list = ft_check_argv(argc, argv);
 	if (list != 0)
 	{
 		if (ft_lstsize(list) == 3)
-			ft_sort_three(list);
+		{
+			ft_sort_three(&list);
+		}
 		else if (ft_lstsize(list) == 5)
 		{
 			ft_add_id_sort(list);
-			ft_sort_five(list);
+			ft_sort_five(&list);
 		}
 		else
 			ft_list_sort(&list, ft_lstsize(list));

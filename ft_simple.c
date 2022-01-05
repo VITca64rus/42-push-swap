@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:38:04 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 14:46:11 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/05 20:10:13 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,31 @@ static void	ft_sa(t_list **a)
 	*a = (*a)->next;
 }
 
-void	ft_sort_three(t_list *a)
+void	ft_sort_three(t_list **a)
 {
 	int		buf;
 	t_list	*start;
 
-	start = a;
+	start = *a;
 	buf = 0;
-	if (a->num < a->next->num)
-		a = a->next;
+	if ((*a)->num < (*a)->next->num)
+		(*a) = (*a)->next;
 	else
 	{
-		ft_sa(&a);
+		ft_sa(a);
 	}
-	if (a->num > a->next->num)
+	if ((*a)->num > (*a)->next->num)
 	{
 		write (1, "rra\n", 4);
-		a = start;
-		buf = a->num;
-		a->num = a->next->next->num;
-		a->next->next->num = a->next->num;
-		a->next->num = buf;
-		if (a->num > a->next->num)
+		(*a) = start;
+		buf = (*a)->num;
+		(*a)->num = (*a)->next->next->num;
+		(*a)->next->next->num = (*a)->next->num;
+		(*a)->next->num = buf;
+		if ((*a)->num > (*a)->next->num)
 			write (1, "sa\n", 3);
 	}
+	*a = start;
 }
 
 static void	ft_pb_ra_s(t_list **a, t_list **b)
@@ -73,23 +74,30 @@ static void	ft_pb_ra_s(t_list **a, t_list **b)
 	}
 }
 
-void	ft_sort_five(t_list *a)
+void	ft_sort_five(t_list **a)
 {
-	t_list	*p;
 	t_list	*ptr;
 	t_list	*b;
 	int		i;
 
+	b = 0;
 	ptr = 0;
 	i = 0;
 	while (i < 5)
 	{
-		ft_pb_ra_s(&a, &b);
+		ft_pb_ra_s(a, &b);
 		i++;
 	}
 	ft_sort_three(a);
 	if (b->p_num_sort < b->next->p_num_sort)
 		write(1, "sb\n", 3);
-	write(1, "pa\npa\n", 6);
-	ft_list_clear(b);
+	ptr = 0;
+	while (b)
+	{
+		ptr = b;
+		b = b->next;
+		ptr->next = ((void *)0);
+		ft_lstadd_front(a, ptr);
+		write(1, "pa\n", 3);
+	}
 }
