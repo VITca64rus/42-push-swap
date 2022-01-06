@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:42:11 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 20:09:15 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/06 16:11:15 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ int		ft_atoi(const char *str);
 void	ft_list_sort(t_list **a, int n);
 void	ft_add_id_sort(t_list *list);
 int		ft_sorted(t_list *a);
+t_list	*ft_check_argv(int argc, char **argv);
+int		ft_is_number(char *a);
 
 #endif

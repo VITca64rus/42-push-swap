@@ -6,13 +6,13 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:39:20 by sazelda           #+#    #+#             */
-/*   Updated: 2022/01/05 20:10:26 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/01/06 16:11:01 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_is_number(char *a)
+int	ft_is_number(char *a)
 {
 	int	i;
 
@@ -30,52 +30,6 @@ static int	ft_is_number(char *a)
 	else if (i == 11 && ft_atoi(a) > -1000000000)
 		return (0);
 	return (1);
-}
-
-static int	ft_ravn_int(char *a, char *b, t_list **list)
-{
-	if (ft_atoi(a) == ft_atoi(b) || ft_is_number(a) == 0)
-	{
-		ft_list_clear(*list);
-		return (0);
-	}
-	return (1);
-}
-
-static t_list	*ft_check_argv(int argc, char **argv)
-{
-	int		j;
-	t_list	*list_el;
-	t_list	*list;
-	int		flag;
-
-	list = ((void *)0);
-	argc--;
-	flag = argc;
-	if (argc == 1)
-	{
-		argv = ft_split(argv[1], ' ');
-		argc = 0;
-		while (argv[argc])
-			argc++;
-		argc--;
-	}
-	while ((argc > 1 && flag > 1) || (argc >= 1 && flag == 1))
-	{
-		j = argc - 1;
-		while (j > 0)
-		{
-			if (ft_ravn_int(argv[argc], argv[j], &list) == 0)
-				return (0);
-			j--;
-		}
-		list_el = ft_lstnew(ft_atoi(argv[argc]));
-		ft_lstadd_front(&list, list_el);
-		argc--;
-	}
-	list_el = ft_lstnew(ft_atoi(argv[argc]));
-	ft_lstadd_front(&list, list_el);
-	return (list);
 }
 
 int	main(int argc, char **argv)
@@ -98,7 +52,7 @@ int	main(int argc, char **argv)
 			ft_list_sort(&list, ft_lstsize(list));
 	}
 	else
-		write(1, "Error", 6);
+		write(1, "Error\n", 7);
 	ft_list_clear(list);
 	return (0);
 }

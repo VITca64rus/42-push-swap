@@ -2,7 +2,7 @@ NAME = push_swap
 CC = gcc
 CFLAGS = 
 SRC  =  	main.c 		ft_simple.c 	ft_radix.c\
-			ft_lst.c 	ft_help.c
+			ft_lst.c 	ft_help.c		ft_checker.c
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
 INCLUDES = push_swap.h
